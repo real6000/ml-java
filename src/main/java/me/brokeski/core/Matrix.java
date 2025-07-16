@@ -1,9 +1,8 @@
 package me.brokeski.core;
 
-import java.util.function.Function;
 
 /**
- * Some lightweight matrix class that serves as the foundation of all math operations
+ * A Lightweight matrix class that serves as the foundation of all math operations
  * used in the neural network. This class includes basic operations such as dot product,
  * addition, transposition, and element-wise function application.
  *

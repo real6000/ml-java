@@ -20,7 +20,7 @@ public class NeuralNetwork {
      *
      * @param layer Layer to add.
      */
-    public void addLayer(Layer layer){
+    public void addLayer(Layer layer) {
         layers.add(layer);
     }
 
@@ -30,35 +30,29 @@ public class NeuralNetwork {
      * @param input Input matrix.
      * @return Output matrix fro mthe last layer.
      */
-    public Matrix forward(Matrix input){
+    public Matrix forward(Matrix input) {
         Matrix output = input;
-        for(Layer layer : layers){
+        for (Layer layer : layers) {
             output = layer.forward(output);
 
         }
         return output;
     }
+
     /**
      * Performs a single training step using backpropagation.
      *
      * @param input Input data matrix.
-     * @param target Expected output matrix.
-     * @param learningRate Learning rate for updates.
+     * @param outputGradient Gradient from loss function.
+     * @param learningRate Learning rate.
      */
-    public void train(Matrix input, Matrix target, double learningRate){
-        //forward pass
-        Matrix output = forward(input);
+    public void train(Matrix input, Matrix outputGradient, double learningRate) {
+        // Forward first to cache values
+        forward(input);
 
-        //Compute simple Mean Squared Error loss gradient: dL/dOutput = 2*(output - target)
-        Matrix lossGrad = new Matrix(output.rows, output.cols);
-        for(int i =0; i<output.rows; i++){
-            for(int j = 0; j < output.cols; j++){
-                lossGrad.data[i][j] = 2 * (output.data[i][j] - target.data[i][j]);
-            }
-        }
-        //Backpropagation through layers in reverse order
-        Matrix grad = lossGrad;
-        for(int i = layers.size() - 1; i >= 0; i--){
+        // Backpropagate using external gradient
+        Matrix grad = outputGradient;
+        for (int i = layers.size() - 1; i >= 0; i--) {
             grad = layers.get(i).backward(grad, learningRate);
         }
     }

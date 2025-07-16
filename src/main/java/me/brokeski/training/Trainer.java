@@ -2,6 +2,7 @@ package me.brokeski.training;
 
 import me.brokeski.core.Matrix;
 import me.brokeski.data.DataPoint;
+import me.brokeski.loss.LossFunction;
 import me.brokeski.model.NeuralNetwork;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Trainer {
 
     private final NeuralNetwork network;
+    private final LossFunction lossFunction;
     private final double learningRate;
     private final int epochs;
 
@@ -22,11 +24,13 @@ public class Trainer {
      * Constructs a Trainer.
      *
      * @param network NeuralNetwork to train.
+     * @param lossFunction Loss function to use.
      * @param learningRate Learning rate for gradient updates.
      * @param epochs Number of training epochs.
      */
-    public Trainer(NeuralNetwork network, double learningRate, int epochs){
+    public Trainer(NeuralNetwork network, LossFunction lossFunction,double learningRate, int epochs){
         this.network = network;
+        this.lossFunction = lossFunction;
         this.learningRate = learningRate;
         this.epochs = epochs;
     }
@@ -40,9 +44,11 @@ public class Trainer {
         for(int epoch = 1; epoch <= epochs; epoch++){
             double totalLoss = 0;
             for(DataPoint dp : dataset){
-                network.train(dp.getInput(), dp.getTarget(), learningRate);
                 Matrix output = network.forward(dp.getInput());
-                totalLoss += computeLoss(output, dp.getTarget());
+                Matrix grad = lossFunction.derivative(output, dp.getTarget());
+                totalLoss += lossFunction.compute(output, dp.getTarget());
+                network.train(dp.getInput(), dp.getTarget(), learningRate); // still uses internal gradient
+                network.train(dp.getInput(), grad, learningRate);
             }
             double averageLoss = totalLoss / dataset.size();
             System.out.printf("Epoch %d/%d - Loss: %.6f%n", epoch, epochs, averageLoss);
