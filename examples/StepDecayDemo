@@ -1,0 +1,11 @@
+import training.StepDecayScheduler;
+
+public class StepDecayDemo {
+    public static void main(String[] args) {
+        StepDecayScheduler scheduler = new StepDecayScheduler(0.1, 5, 0.5);
+        for (int epoch = 1; epoch <= 20; epoch++) {
+            double lr = scheduler.getLearningRate(epoch);
+            System.out.printf("Epoch %d → LR: %.5f\n", epoch, lr);
+        }
+    }
+}
