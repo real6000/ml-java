@@ -3,6 +3,7 @@
 A modular, extensible neural network framework written in Java.  
 Designed for learning and experimentation with core ML concepts such as layers, activations, loss functions, optimizers, and training loops.
 
+A self-produced project on the topic of Machine learning of which is
 Open Source and free for recreational use or inspiration.
 
 ---
