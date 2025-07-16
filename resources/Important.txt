@@ -1,0 +1,7 @@
+# resources/placeholder.txt
+
+This folder stores:
+- CSV loss outputs
+- Dataset files
+- JSON configs
+- Model export files
