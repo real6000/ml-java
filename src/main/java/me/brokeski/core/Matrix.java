@@ -109,6 +109,15 @@ public class Matrix {
     public interface Function{
         double apply(double x);
     }
+    public static Matrix transpose(Matrix m){
+        Matrix result = new Matrix(m.cols, m.rows);
+        for(int i = 0; i < m.rows; i++){
+            for(int j = 0; j < m.cols; j++){
+                result.data[j][i] = m.data[i][j];
+            }
+        }
+        return result;
+    }
 
 }
 
