@@ -1,6 +1,5 @@
 package me.brokeski.model;
 
-
 import me.brokeski.core.Matrix;
 import me.brokeski.layers.Layer;
 
