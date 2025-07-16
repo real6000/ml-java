@@ -1,5 +1,14 @@
 package me.brokeski;
 
+import me.brokeski.activations.Sigmoid;
+import me.brokeski.data.DataPoint;
+import me.brokeski.data.XORData;
+import me.brokeski.layers.DenseLayer;
+import me.brokeski.model.NeuralNetwork;
+import me.brokeski.training.Trainer;
+
+import java.util.List;
+
 /**
  * Made by real600
  *
@@ -17,6 +26,23 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("ML Framework Starting...");
-        //setup l8r
+
+        // Avengers!!! Assemble.
+        NeuralNetwork nn = new NeuralNetwork();
+        nn.addLayer(new DenseLayer(2, 4, new Sigmoid()));
+        nn.addLayer(new DenseLayer(4, 1, new Sigmoid()));
+
+        List<DataPoint> data = XORData.getDataset();
+
+        Trainer trainer = new Trainer(nn, 0.5, 10000);
+        trainer.train(data);
+
+        System.out.println("Training complete. Testing XOR:");
+
+        for(DataPoint dp : data){
+            var output = nn.forward(dp.getInput());
+            double[] result = output.toArray();
+            System.out.printf("Input: %s, Output: %.4f%n", java.util.Arrays.toString(dp.getInput().toArray()), result[0]);
+        }
     }
 }
