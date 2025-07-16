@@ -4,6 +4,8 @@ import me.brokeski.activations.Sigmoid;
 import me.brokeski.data.DataPoint;
 import me.brokeski.data.XORData;
 import me.brokeski.layers.DenseLayer;
+import me.brokeski.loss.LossFunction;
+import me.brokeski.loss.MSE;
 import me.brokeski.model.NeuralNetwork;
 import me.brokeski.training.Trainer;
 
@@ -34,7 +36,8 @@ public class Main {
 
         List<DataPoint> data = XORData.getDataset();
 
-        Trainer trainer = new Trainer(nn, 0.5, 10000);
+        LossFunction loss = new MSE();
+        Trainer trainer = new Trainer(nn, loss, 0.5, 10000);
         trainer.train(data);
 
         System.out.println("Training complete. Testing XOR:");
