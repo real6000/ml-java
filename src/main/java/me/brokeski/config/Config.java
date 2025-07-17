@@ -1,4 +1,4 @@
-package config;
+package me.brokeski.config;
 
 /**
  * Central configuration class for tuning model hyperparameters and controlling

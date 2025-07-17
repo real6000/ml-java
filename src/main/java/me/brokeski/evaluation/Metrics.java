@@ -1,4 +1,4 @@
-package evaluation;
+package me.brokeski.evaluation;
 
 import me.brokeski.core.Matrix;
 
