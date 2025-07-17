@@ -72,4 +72,5 @@ public class Trainer {
         }
         return sum / (output.rows * output.cols);
     }
+
 }
