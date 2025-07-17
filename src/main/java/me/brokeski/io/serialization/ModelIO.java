@@ -1,4 +1,4 @@
-package me.brokeski.io;
+package me.brokeski.io.serialization;
 
 import me.brokeski.model.NeuralNetwork;
 
