@@ -40,6 +40,30 @@ public class NeuralNetwork {
     }
 
     /**
+     * Performs the backward pass through the entire network.
+     *
+     *
+     * @param gradOutput The gradient of the loss with respect to the network output.
+     * @param learningRate The learning rate.
+     */
+    public void backward(Matrix gradOutput, double learningRate){
+        for (int i = layers.size() - 1; i >= 0; i--){
+            gradOutput = layers.get(i).backward(gradOutput, learningRate);
+        }
+    }
+
+    /**
+     * Updates all layer weights using the specified learning rate.
+     *
+     * @param learningRate The learning rate to use for weight updates.
+     */
+    public void update(double learningRate) {
+        for (Layer layer : layers) {
+            layer.update(learningRate);
+        }
+    }
+
+    /**
      * Performs a single training step using backpropagation.
      *
      * @param input Input data matrix.

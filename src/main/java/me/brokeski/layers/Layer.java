@@ -28,4 +28,13 @@ public abstract class Layer {
      * @return The gradient with respect to the input of this layer.
      */
     public abstract Matrix backward(Matrix outputGradient , double learningRate);
+
+    /**
+     * Performs update with learning rate.
+     *
+     * @param learningRate
+     */
+    public void update(double learningRate){
+
+    }
 }

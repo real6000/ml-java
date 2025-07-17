@@ -37,7 +37,7 @@ public class Main {
         List<DataPoint> data = XORData.getDataset();
 
         LossFunction loss = new MSE();
-        Trainer trainer = new Trainer(nn, loss, 0.5, 10000);
+        Trainer trainer = new Trainer(nn, 0.5, 10000);
         trainer.train(data);
 
         System.out.println("Training complete. Testing XOR:");

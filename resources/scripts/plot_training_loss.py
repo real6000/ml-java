@@ -1,4 +1,4 @@
-""" 
+"""
 plot_training_loss.py
 
 This script visualizes the training loss of the neural network.

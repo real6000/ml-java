@@ -15,4 +15,6 @@ public class LossFunctionTest {
         LossFunction ce = new CrossEntropy();
         System.out.println("CrossEntropy Loss: " + ce.calculate(target, predicted));
     }
+
+
 }
